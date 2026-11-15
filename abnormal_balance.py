@@ -163,15 +163,48 @@ for account, balances in trial_balance.items():
         f"status: {status}"
     )
 
+account_status = {
+    item["account"].lower(): item["status"] for item in account_analysis
+}
+assert account_status["accounts payable"] == "INVESTIGATE"
+assert account_status["rent expense"] == "ZERO BALANCE"
+
+# AUTOMATED TEST CASES
+
+account_status = {
+    item["account"].lower(): item["status"] for item in account_analysis
+}
+
+assert len(journal) == 8
+assert len(journal_test) == 10
+
+assert account_status["accounts payable"] == "INVESTIGATE"
+assert account_status["rent expense"] == "ZERO BALANCE"
+
+assert debit_total == Decimal("19000000")
+assert credit_total == Decimal("14500000")
+
+assert len(exception_accounts) == 1
+assert exception_accounts[0]["account"] == "Accounts Payable"
+
+print("\nAUTOMATED TEST CASES PASSED")
+print("-----------------------")
+print("PASS: Original journal contains 8 transactions.")
+print("PASS: Test journal contains 10 transactions.")
+print("PASS:Accounts Payable = INVESTIGATE.")
+print("PASS: Rent Expense = ZERO BALANCE.")
+print("PASS: trial Balance totals are correct.")
+print("PASS: Exception report contains only INVESTIGATE accounts.")
+
 # EXCEPTION REPORT 
 
 print("\nEXCEPTION REPORT")
 print("-----------------------")
 
-if exception_accounts.append:
+if exception_accounts:
     for item in exception_accounts:
         print(
-            f"Account: {item['account']:25}"
+            f"Account: {item['account']:<25}"
             f"Balance: Rp{item['balance_amount']:,.0f}, "
             f"Actual Side: {item['actual_side'].upper():<7}, "
             f"Expected: {item['expected_side'].upper():<7}"
