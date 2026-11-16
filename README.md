@@ -1,7 +1,3 @@
-# accounting-python-foundations-
-
-Python fundamentals for accounting and finance
-
 # Accounting Python Foundations
 
 A practical Python project focused on accounting automation, financial data validation, and audit-oriented controls.
